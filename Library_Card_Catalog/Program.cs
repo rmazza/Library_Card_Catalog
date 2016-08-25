@@ -34,4 +34,56 @@ namespace Library_Card_Catalog
 
 		}
 	}
+
+	public class CardCatalog {
+		private string _fileName{ get; set; }
+		 
+
+		public void cardCatalog(string fileName) {
+
+		}
+
+		public string ListBooks() {
+
+		}
+
+		public void AddBook() {
+			
+			try{
+			Console.WriteLine ("Enter the book title: ");
+			Title = Console.ReadLine ();
+			}catch(Exception){
+				Console.WriteLine ("Exception found please enter a valid book title");
+				Console.ReadLine ();
+			}
+
+			try {
+			Console.WriteLine ("Enter the author of the book: ");
+			Author = Console.ReadLine ();
+			}catch(Exception) {
+				Console.WriteLine ("Exception found please enter a valid book author");
+				Console.ReadLine ();
+			}
+
+			try {
+			Console.WriteLine ("Enter the genre of the book: ");
+				Genre = Console.ReadLine ();
+			}catch(Exception) {
+				Console.WriteLine ("Exception found please enter a valid book genre");
+				Console.ReadLine ();
+			}
+
+			Console.WriteLine ("Enter the number of pages the book has: ");
+			NumPages = Convert.ToInt32 (Console.ReadLine ());
+
+			Console.WriteLine ("Enter the year the book was published: ");
+			YearPublished = Convert.ToInt32 (Console.ReadLine ());
+
+		}
+
+		public void Save() {
+
+		}
+
+	}
 }
