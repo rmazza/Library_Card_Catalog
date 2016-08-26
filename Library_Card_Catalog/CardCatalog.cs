@@ -86,7 +86,10 @@ namespace Library_Card_Catalog
 
                 try
                 {
+                    // Create a file stream, then create a new file at the given path
                     FileStream s = new FileStream(path, FileMode.CreateNew);
+
+                    // Close the file stream
                     s.Close();
                 }
                 catch (IOException e)

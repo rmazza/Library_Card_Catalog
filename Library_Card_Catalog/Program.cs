@@ -13,22 +13,26 @@ namespace Library_Card_Catalog
             int choice, year, pages;
             string title, author, genre, fileName;
 
-            //Gets the path of the current directory and appends a '\' 
-            //Stores the string into the path variable, the file name is NOT saved in this string
+            // Gets the path of the current directory and appends a '\' 
+            // Stores the string into the path variable, the file name is NOT saved in this string
             string path = Directory.GetCurrentDirectory() + "\\";
 
             //Ask user for a file name and read into string variable fileName
             Console.Write("Enter a filename to save to: ");
+
+            // Read user input and store into the string variable 'fileName'
             fileName = Console.ReadLine();
 
-            //Create a new instance of the CardCatalog class
+            //Create a new instance of the CardCatalog class called 'cat'
             CardCatalog cat = new CardCatalog(fileName);
 
+            // Creat a new instance of a BinaryFormatter called 'formatter'
             IFormatter formatter = new BinaryFormatter();
 
             //Pass the path and the file name to the CardCatalog's Load method
             cat.Load(path + fileName, formatter);
 
+            //  A do-while loop to run at least one time to get the user input
             do
             {
                 //Ask User to input a number 1 - 3 based on which option they choose
@@ -42,13 +46,15 @@ namespace Library_Card_Catalog
                 //Parse the string to an integer and if successful returns the parsed number to the variable choice
                 int.TryParse(c, out choice);
 
-
+                // If user choice eguals 1, then list all of the books in the current instance of cat
                 if (choice == 1)
                 {
                     //List All Books
                     cat.ListBooks();
 
                 }
+                // If user choice equals 2, ask user for book information, then store into a list
+                // inside of the Card Catalog Class
                 else if (choice == 2)
                 {
                     //ADD A BOOK
