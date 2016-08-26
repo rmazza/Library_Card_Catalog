@@ -10,14 +10,12 @@ namespace Library_Card_Catalog
     {
         private string _fileName;
         private List<Book> books;
-        private IFormatter formatter;
 
         public CardCatalog() { }
 
         public CardCatalog(string fileName)
         {
             this._fileName = fileName;
-            this.formatter = new BinaryFormatter();
             this.books = new List<Book>();
         }
 
@@ -38,7 +36,7 @@ namespace Library_Card_Catalog
 
         // SaveAndExit Method - takes one string parameter 'path'
         // Serialiazes the Book List (List<Book>) and writes it to the file given in the path
-        public void SaveAndExit(string path)
+        public void SaveAndExit(string path, IFormatter formatter)
         {
             try
             {
@@ -58,7 +56,7 @@ namespace Library_Card_Catalog
         //checks to see if a file already exists
         //If file exists then it loads the file's serialized content into memory
         //If file does not exist then it creates the file
-        public void Load(string path)
+        public void Load(string path, IFormatter formatter)
         {
             // Check to see if the file exists
             // If true then tries to desearialize the file

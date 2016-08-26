@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Library_Card_Catalog
 {
@@ -7,6 +9,7 @@ namespace Library_Card_Catalog
     {
         public static void Main(string[] args)
         {
+            //test
             int choice, year, pages;
             string title, author, genre, fileName;
 
@@ -21,8 +24,10 @@ namespace Library_Card_Catalog
             //Create a new instance of the CardCatalog class
             CardCatalog cat = new CardCatalog(fileName);
 
+            IFormatter formatter = new BinaryFormatter();
+
             //Pass the path and the file name to the CardCatalog's Load method
-            cat.Load(path + fileName);
+            cat.Load(path + fileName, formatter);
 
             do
             {
@@ -68,9 +73,9 @@ namespace Library_Card_Catalog
                 else
                 {
                     // SAVE AND EXIT
-                    // If the choice is 3 or any other number beside 1 or 2
+                    // If the choice is 3 or any other number beside 1 or 2, or any text
                     // The SaveAndExit method is called and then the program is exited
-                    cat.SaveAndExit(path + fileName);
+                    cat.SaveAndExit(path + fileName, formatter);
                 }
 
             } while (choice >= 1 && choice <= 2);
