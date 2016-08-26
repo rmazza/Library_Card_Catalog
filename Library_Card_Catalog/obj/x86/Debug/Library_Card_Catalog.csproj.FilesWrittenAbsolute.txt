@@ -1,0 +1,5 @@
+/Users/oliverlykken/Projects/Library_Card_Catalog/Library_Card_Catalog/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/oliverlykken/Projects/Library_Card_Catalog/Library_Card_Catalog/bin/Debug/Library_Card_Catalog.exe.mdb
+/Users/oliverlykken/Projects/Library_Card_Catalog/Library_Card_Catalog/bin/Debug/Library_Card_Catalog.exe
+/Users/oliverlykken/Projects/Library_Card_Catalog/Library_Card_Catalog/obj/x86/Debug/Library_Card_Catalog.exe
+/Users/oliverlykken/Projects/Library_Card_Catalog/Library_Card_Catalog/obj/x86/Debug/Library_Card_Catalog.exe.mdb
