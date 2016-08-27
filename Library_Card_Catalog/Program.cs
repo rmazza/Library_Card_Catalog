@@ -45,30 +45,39 @@ namespace Library_Card_Catalog
                 {
                     case 0:
                         break;
+
                     case 1:
+
                         currentCatalog.ListBooks();
+
                         break;
+
                     case 2:
-                        //ADD A BOOK
-                        Console.Write("Please enter the title: ");
-                        title = Console.ReadLine();
 
-                        Console.Write("Please enter the author: ");
-                        author = Console.ReadLine();
+                        ////ADD A BOOK
+                        //Console.Write("Please enter the title: ");
+                        //title = Console.ReadLine();
 
-                        Console.Write("Please enter the genre: ");
-                        genre = Console.ReadLine();
+                        //Console.Write("Please enter the author: ");
+                        //author = Console.ReadLine();
 
-                        Console.Write("Please enter the # of pages: ");
-                        int.TryParse(Console.ReadLine(), out pages);
+                        //Console.Write("Please enter the genre: ");
+                        //genre = Console.ReadLine();
 
-                        Console.Write("Please enter the year published: ");
-                        int.TryParse(Console.ReadLine(), out year);
+                        //Console.Write("Please enter the # of pages: ");
+                        //int.TryParse(Console.ReadLine(), out pages);
 
-                        //call AddBook from the Card Catalog class and pass a new Book object to store in the list
-                        currentCatalog.AddBook(new Book(title, author, genre, pages, year));
+                        //Console.Write("Please enter the year published: ");
+                        //int.TryParse(Console.ReadLine(), out year);
+
+                        ////call AddBook from the Card Catalog class and pass a new Book object to store in the list
+                        //currentCatalog.AddBook(new Book(title, author, genre, pages, year));
+                        
+
                         break;
+
                     case 3:
+
                         // CHOICE 3: REMOVE BOOK
                         string inputTitle;
 
@@ -83,7 +92,7 @@ namespace Library_Card_Catalog
                             {
                                 Console.WriteLine("Please Enter a title: ");
                             }
-                            else if (inputTitle == "e" || inputTitle == "exit")
+                            else if (inputTitle.ToLower() == "e" || inputTitle.ToLower() == "exit")
                             {
                                 break;
                             }
@@ -93,19 +102,20 @@ namespace Library_Card_Catalog
                                 currentCatalog.RemoveBook(inputTitle);
                                 break;
                             }
-
                         }
+
                         break;
+
+                    case 4:
+
+                       // SAVE AND EXIT
+                       // The SaveAndExit method is called and then the program is exited
+                       currentCatalog.SaveAndExit(path + fileName, formatter);
+                             
+                       return;
+
                     default:
                         break;
-                }
-
-                if(userChoice == 4)
-                {
-                    // SAVE AND EXIT
-                    // The SaveAndExit method is called and then the program is exited
-                    currentCatalog.SaveAndExit(path + fileName, formatter);
-                    break;
                 }
 
             }

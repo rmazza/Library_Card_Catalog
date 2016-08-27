@@ -49,6 +49,11 @@ namespace Library_Card_Catalog
             books.Add(b);
         }
 
+        //public bool AddBook(string title,string author,string genre,int pages,int year)
+        //{
+        //    return 1;
+        //}
+
         /// <summary>
         ///     RemoveBook is a method in the CardCatalog class.
         /// </summary>
@@ -103,12 +108,13 @@ namespace Library_Card_Catalog
         /// </remarks>
         public void Load(string path, IFormatter formatter)
         {
+            FileStream readerFileStream;
 
             if (File.Exists(path))
             {
-                 try
+                try
                 {
-                    FileStream readerFileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                    readerFileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
                     this.books = (List<Book>)formatter.Deserialize(readerFileStream);
                     readerFileStream.Close();
 
@@ -125,17 +131,14 @@ namespace Library_Card_Catalog
             {
                 try
                 {
-                    FileStream s = new FileStream(path, FileMode.CreateNew);
-                    s.Close();
+                    readerFileStream = new FileStream(path, FileMode.CreateNew);
+                    readerFileStream.Close();
                 }
                 catch (IOException e)
                 {
                     Console.WriteLine("Error creating a new empty file.\nMessage: {0}", e.Message);
                 }
-
             }
-
         }
-
     }
 }
