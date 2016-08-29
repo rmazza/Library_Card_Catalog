@@ -32,9 +32,14 @@ namespace Library_Card_Catalog
             foreach (Book b in books)
             {
                 //Read trough each book oject in the list and print the appropriate information about the book
-                Console.Write("\nTitle: {0}\nAuthor: {1}\nGenre: {2}\n# of Pages: {3}\nYear: {4}", b.Title, b.Author, b.Genre, b.NumPages, b.YearPublished);
-                Console.WriteLine();
+                PrintBook(b);
             }
+        }
+
+        public void PrintBook(Book b)
+        {
+            Console.Write("\nTitle: {0}\nAuthor: {1}\nGenre: {2}\n# of Pages: {3}\nYear: {4}", b.Title, b.Author, b.Genre, b.NumPages, b.YearPublished);
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -48,11 +53,6 @@ namespace Library_Card_Catalog
         {
             books.Add(b);
         }
-
-        //public bool AddBook(string title,string author,string genre,int pages,int year)
-        //{
-        //    return 1;
-        //}
 
         /// <summary>
         ///     RemoveBook is a method in the CardCatalog class.
@@ -74,14 +74,41 @@ namespace Library_Card_Catalog
         }
 
         /// <summary>
-        ///     SaveAndExit is a method in the CardCatalog class.
+        ///     SearchBook is a static method in the CardCatalog class.
+        /// </summary>
+        /// <param name="bookList"></param>
+        /// <param name="title"></param>
+        public void SearchBookList(string title)
+        {
+            int counter = 0;
+
+            List<Book> foundBooks = new List<Book>();
+
+            for(int i = 0; i < books.Count; i++)
+            {
+                if (books[i].Title == title)
+                {
+                    counter++;
+                    foundBooks.Add(books[i]);
+                }
+            }    
+            
+            foreach(Book b in foundBooks)
+            {
+                Console.WriteLine("{0} books found", foundBooks.Count);
+
+            }  
+        }
+
+        /// <summary>
+        ///     Save is a method in the CardCatalog class.
         /// </summary>
         /// <param name="path">Path of the current directory + file name</param>
         /// <param name="formatter"></param>
         /// <remarks>
         ///     Serialiazes the Book List (List<Book>) and writes it to the file given in the path.
         /// </remarks>
-        public void SaveAndExit(string path, IFormatter formatter)
+        public void Save(string path, IFormatter formatter)
         {
             try
             {
@@ -140,5 +167,6 @@ namespace Library_Card_Catalog
                 }
             }
         }
+
     }
 }
