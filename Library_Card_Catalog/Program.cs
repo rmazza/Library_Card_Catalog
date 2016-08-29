@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -59,7 +58,7 @@ namespace Library_Card_Catalog
 
                     case 2:
 
-                        Console.Write("Enter the title of the book: ");
+                        Console.Write("\nEnter the title of the book: ");
                         title = Console.ReadLine();
 
                         currentCatalog.SearchBookList(title);

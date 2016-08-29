@@ -29,17 +29,27 @@ namespace Library_Card_Catalog
         /// </remarks>
         public void ListBooks()
         {
-            foreach (Book b in books)
+            if (books.Count > 0)
             {
-                //Read trough each book oject in the list and print the appropriate information about the book
-                PrintBook(b);
+                Console.WriteLine("\n{0} books", books.Count);
+                foreach (Book b in books)
+                {
+                    //call the PrintBook method on each individual book
+                    PrintBook(b);
+                }
+            }else
+            {
+                Console.WriteLine("There are 0 books in the list");
             }
         }
 
+        /// <summary>
+        ///     PrintBook is a method in the CardCatalog class.
+        /// </summary>
+        /// <param name="b"></param>
         public void PrintBook(Book b)
         {
-            Console.Write("\nTitle: {0}\nAuthor: {1}\nGenre: {2}\n# of Pages: {3}\nYear: {4}", b.Title, b.Author, b.Genre, b.NumPages, b.YearPublished);
-            Console.WriteLine();
+            Console.WriteLine("\nTitle: {0}\nAuthor: {1}\nGenre: {2}\n# of Pages: {3}\nYear: {4}", b.Title, b.Author, b.Genre, b.NumPages, b.YearPublished);
         }
 
         /// <summary>
@@ -77,27 +87,28 @@ namespace Library_Card_Catalog
         ///     SearchBook is a static method in the CardCatalog class.
         /// </summary>
         /// <param name="bookList"></param>
-        /// <param name="title"></param>
-        public void SearchBookList(string title)
+        /// <param name="bookTitle"></param>
+        public void SearchBookList(string bookTitle)
         {
-            int counter = 0;
-
-            List<Book> foundBooks = new List<Book>();
+            List<Book> foundBooks = new List<Book>() ;
 
             for(int i = 0; i < books.Count; i++)
             {
-                if (books[i].Title == title)
+                if (books[i].Title == bookTitle)
                 {
-                    counter++;
                     foundBooks.Add(books[i]);
-                }
-            }    
-            
-            foreach(Book b in foundBooks)
-            {
-                Console.WriteLine("{0} books found", foundBooks.Count);
 
-            }  
+                    // alternate method
+                    //PrintBook(books[i]);
+                }
+            }
+
+            Console.WriteLine("\n{0} books found\n", foundBooks.Count);
+            foreach (Book b in foundBooks)
+            {
+                PrintBook(b);
+            }
+
         }
 
         /// <summary>
@@ -112,11 +123,13 @@ namespace Library_Card_Catalog
         {
             try
             {
-                FileStream writeStream = new FileStream(path, FileMode.Open, FileAccess.Write);
-                formatter.Serialize(writeStream, this.books);
+                using (FileStream writeStream = new FileStream(path, FileMode.Open, FileAccess.Write))
+                {
+                    formatter.Serialize(writeStream, this.books);
 
-                // Closes the file stream
-                writeStream.Close();
+                    // Closes the file stream
+                    writeStream.Close();
+                }
             }
             catch (IOException)
             {
@@ -139,12 +152,14 @@ namespace Library_Card_Catalog
 
             if (File.Exists(path))
             {
+
                 try
                 {
-                    readerFileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                    this.books = (List<Book>)formatter.Deserialize(readerFileStream);
-                    readerFileStream.Close();
-
+                    using (readerFileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        this.books = (List<Book>)formatter.Deserialize(readerFileStream);
+                        readerFileStream.Close();
+                    }
                     Console.WriteLine("{0} successfully loaded", this._fileName);
 
                 }
@@ -154,12 +169,14 @@ namespace Library_Card_Catalog
                 }
 
             }
-            else
+            else 
             {
                 try
                 {
-                    readerFileStream = new FileStream(path, FileMode.CreateNew);
-                    readerFileStream.Close();
+                    using (readerFileStream = new FileStream(path, FileMode.CreateNew))
+                    {
+                        readerFileStream.Close();
+                    }
                 }
                 catch (IOException e)
                 {
@@ -167,6 +184,5 @@ namespace Library_Card_Catalog
                 }
             }
         }
-
     }
 }
