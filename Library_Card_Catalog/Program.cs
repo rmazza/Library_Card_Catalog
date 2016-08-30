@@ -16,7 +16,7 @@ namespace Library_Card_Catalog
             string path = Directory.GetCurrentDirectory() + "\\";
 
             //Ask user for a file name
-            Console.Write("Please enter the filename: ");
+            Console.Write("Enter database name: ");
 
             // Read user input and store into the string variable 'fileName'
             fileName = Console.ReadLine();
@@ -106,9 +106,6 @@ namespace Library_Card_Catalog
                             }
                             else if(!String.IsNullOrWhiteSpace(inputTitle))
                             {
-                                // Check to see if book exists
-
-
                                 // Call RemoveBook, a mehtod of the CardCatalog class.
                                 currentCatalog.RemoveBook(inputTitle);
                                 break;

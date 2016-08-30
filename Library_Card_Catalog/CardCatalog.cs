@@ -12,6 +12,7 @@ namespace Library_Card_Catalog
     {
         private string _fileName;
         private List<Book> books;
+        public int BookCount { get; set; }
 
         public CardCatalog() { }
 
@@ -88,9 +89,10 @@ namespace Library_Card_Catalog
         /// </summary>
         /// <param name="bookList"></param>
         /// <param name="bookTitle"></param>
+        /// <remarks>Using a new List<Book> - incase there are multiple duplicates </remarks>
         public void SearchBookList(string bookTitle)
         {
-            List<Book> foundBooks = new List<Book>() ;
+            List<Book> foundBooks = new List<Book>();
 
             for(int i = 0; i < books.Count; i++)
             {
@@ -98,8 +100,6 @@ namespace Library_Card_Catalog
                 {
                     foundBooks.Add(books[i]);
 
-                    // alternate method
-                    //PrintBook(books[i]);
                 }
             }
 
@@ -108,8 +108,30 @@ namespace Library_Card_Catalog
             {
                 PrintBook(b);
             }
-
+           
         }
+
+        /// <summary>
+        ///     GetBookIndex is a method in the CardCatalog class.
+        /// </summary>
+        /// <param name="bookTitle"></param>
+        /// <returns>Returns the position of the specified book, returns -1 if nothing is found</returns>
+        public int GetBookIndex(string bookTitle)
+        {
+            for (int i = 0; i < books.Count; i++)
+            {
+                if (books[i].Title == bookTitle)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        //public void EditBook(Book b)
+        //{
+
+        //}
 
         /// <summary>
         ///     Save is a method in the CardCatalog class.
@@ -126,7 +148,6 @@ namespace Library_Card_Catalog
                 using (FileStream writeStream = new FileStream(path, FileMode.Open, FileAccess.Write))
                 {
                     formatter.Serialize(writeStream, this.books);
-
                     // Closes the file stream
                     writeStream.Close();
                 }
@@ -152,7 +173,6 @@ namespace Library_Card_Catalog
 
             if (File.Exists(path))
             {
-
                 try
                 {
                     using (readerFileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -160,14 +180,16 @@ namespace Library_Card_Catalog
                         this.books = (List<Book>)formatter.Deserialize(readerFileStream);
                         readerFileStream.Close();
                     }
+
                     Console.WriteLine("{0} successfully loaded", this._fileName);
 
                 }
                 catch (IOException e)
                 {
-                    Console.WriteLine("Error loading the file!\nMessage: {0}", e.Message);
-                }
 
+                    Console.WriteLine("Error loading the file!\nMessage: {0}", e.Message);
+
+                }
             }
             else 
             {
