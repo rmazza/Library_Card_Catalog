@@ -11,6 +11,7 @@ namespace Library_Card_Catalog
     class CardCatalog
     {
         private string _fileName;
+        private int bookId;
         private List<Book> books;
         public int BookCount { get; set; }
 
@@ -63,6 +64,15 @@ namespace Library_Card_Catalog
         public void AddBook(Book b)
         {
             books.Add(b);
+        }
+
+        /// <summary>
+        ///     getBookList is a method in the CardCatalog class.
+        /// </summary>
+        /// <returns>List<Book></returns>
+        public List<Book> getBookList()
+        {
+            return books;
         }
 
         /// <summary>
@@ -127,11 +137,6 @@ namespace Library_Card_Catalog
             }
             return -1;
         }
-
-        //public void EditBook(Book b)
-        //{
-
-        //}
 
         /// <summary>
         ///     Save is a method in the CardCatalog class.
